@@ -1,0 +1,35 @@
+<section class="container my-5" style="max-width: 400px;">
+    <h3 class="fw-bold mb-3">Inicia Sesión</h3>
+    <p class="text-muted">Accede con tu cuenta para poder visualizar tus productos favoritos guardados!</p>
+
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+        <div class="mb-3">
+            <label for="correo" class="form-label">Correo Electrónico</label>
+            <input type="email" class="form-control" id="correo" [(ngModel)]="correo" name="correo" required>
+        </div>
+        <div class="mb-3">
+            <label for="clave" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" id="clave" [(ngModel)]="clave" name="clave" required>
+        </div>
+        <div class="d-grid mb-3">
+            <button type="submit" class="btn btn-primary" [disabled]="loading">
+                <span *ngIf="!loading">Iniciar sesión</span>
+                <span *ngIf="loading">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    Procesando...
+                </span>
+            </button>
+        </div>
+        <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+
+        <div class="text-center my-3 text-muted">o</div>
+
+        <div class="d-grid mb-3">
+            <button type="button" class="btn btn-light border" (click)="loginWithGoogle()">
+                <img src="https://img.icons8.com/?size=100&id=17949&format=png&color=000000" alt="Google logo"
+                    width="20" class="me-2">
+                Inicia con Google
+            </button>
+        </div>
+    </form>
+</section>

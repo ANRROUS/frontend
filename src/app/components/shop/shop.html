@@ -1,0 +1,65 @@
+<div class="container-fluid py-4">
+  <div class="row">
+    <!-- Filtros de categoría -->
+    <aside class="col-md-3 mb-4 mb-md-0">
+      <h5 class="fw-bold">Todas las categorías</h5>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="categoriaId" id="categoria-0" (change)="onCategoriaSeleccionada(0)">
+        <label class="form-check-label" for="categoria-0">Todas</label>
+      </div>
+      <div class="form-check" *ngFor="let cat of categorias">
+        <input class="form-check-input" type="radio" name="categoriaId" [id]="'cat-' + cat.id" [value]="cat.id"
+          [checked]="cat.id == categoriaSeleccionada" (change)="onCategoriaSeleccionada(cat.id)">
+        <label class="form-check-label" [attr.for]="'cat-' + cat.id">
+          {{ cat.nombre }}
+        </label>
+      </div>
+      <hr />
+    </aside>
+
+    <!-- Productos -->
+    <main class="col-md-9">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <span class="text-muted">{{ resultados }} Resultados Encontrados</span>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-sm-6 col-md-4" *ngFor="let producto of productos">
+          <div class="card h-100 shadow-sm border-0">
+            <!-- Imagen del producto -->
+            <img [src]="producto.imagen" class="card-img-top" [alt]="producto.nombre"
+              style="object-fit: cover; height: 200px;" />
+
+            <div class="card-body d-flex flex-column">
+              <!-- Nombre y precio -->
+              <h6 class="card-title">{{ producto.nombre }}</h6>
+              <p class="text-primary fw-semibold mb-1">${{ producto.precio | number: '1.2-2' }}</p>
+              <p class="text-muted small mb-1">{{ producto.descripcion }}</p>
+              <p class="text-muted small">{{ producto.categoria.nombre }}</p>
+
+              <!-- Selector de cantidad y botón -->
+              <div class="mt-auto">
+                <div class="row g-2 align-items-end">
+                  <div class="col-6">
+                    <label [attr.for]="'cantidad-' + producto.id"
+                      class="form-label text-secondary small">Unidades:</label>
+                    <input #cantidadInput type="number" id="cantidad-{{ producto.id }}" min="1" value="1"
+                      class="form-control form-control-sm shadow-sm border-primary" />
+                  </div>
+
+                  <div class="col-6">
+                    <button (click)="agregarAlCarrito(producto, cantidadInput.valueAsNumber || 1)"
+                      class="btn btn-sm btn-primary w-100 fw-bold shadow-sm">
+                      <i class="fas fa-cart-plus me-1"></i> Agregar
+                    </button>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>

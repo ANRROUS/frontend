@@ -1,0 +1,52 @@
+<div class="container my-5">
+    <h2 class="text-center mb-4 fw-bold">Mi lista de carrito</h2>
+    <div class="row">
+        <!-- Lista de productos añadidos al carrito -->
+        <div class="col-md-8">
+            <div class="card-carrito bg-white mb-3">
+                <div class="row mb-2 align-items-center fw-semibold">
+                    <div class="col-2 text-start"></div>
+                    <div class="col-4 text-start">PRODUCTO</div>
+                    <div class="col-2 text-start">P.UNIT.</div>
+                    <div class="col-2 text-start">CANT.</div>
+                    <div class="col-2 text-start">IMPORTE</div>
+                </div>
+                <div class="row mb-2 align-items-center" *ngFor="let detalle of carritoItems">
+                    <div class="col-2">
+                        <img [src]="detalle.producto.Imagen || 'assets/img/default.png'" alt="Imagen"
+                            class="img-fluid rounded" style="max-width:70px;">
+                    </div>
+                    <div class="col-4">{{ detalle.producto.nombre }}</div>
+                    <div class="col-2">${{ detalle.precio_unitario | number:'1.2-2' }}</div>
+                    <div class="col-2">{{ detalle.cantidad }}</div>
+                    <div class="col-2 fw-semibold">${{ detalle.subtotal | number:'1.2-2' }}</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detalles Compra -->
+        <div class="col-md-4">
+            <div class="card-carrito bg-white p-3">
+                <h5>Total de la Compra</h5>
+                <hr>
+                <div class="d-flex justify-content-between">
+                    <span>Subtotal:</span>
+                    <span>${{ total | number:'1.2-2' }}</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span>Envío:</span><span>Gratis</span>
+                </div>
+                <hr>
+                <div class="d-flex justify-content-between fw-bold">
+                    <span>Total:</span>
+                    <span>${{ total | number:'1.2-2' }}</span>
+                </div>
+                <button class="btn btn-primary w-100 mt-4" (click)="procesarCompra()">Realizar la compra</button>
+            </div>
+        </div>
+
+        <div *ngIf="mensaje" class="alert alert-success text-center mt-4">
+            {{ mensaje }}
+        </div>
+    </div>
+</div>
