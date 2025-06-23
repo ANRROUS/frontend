@@ -13,7 +13,8 @@ export class AuthService {
   async login(correo: string, clave: string): Promise<Usuario> {
     const res = await api.post<Usuario>(
       '/login',
-      { correo, clave }
+      { correo, clave },
+      { withCredentials: true }
     );
     this.usuarioSubject.next(res.data);
     return res.data;
@@ -38,7 +39,9 @@ export class AuthService {
   }
 
   async logout(): Promise<void> {
-    await api.get('/logout');
+    await api.get('/logout' ,{ 
+      withCredentials: true 
+    });
     this.usuarioSubject.next(null);
   }
 

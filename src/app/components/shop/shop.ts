@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProductoService } from '../../services/producto.service';
 import { HomeCartService } from '../../services/home.service';
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-shop',
@@ -25,7 +25,7 @@ export class Shop implements OnInit {
     private homeService: HomeCartService,
     private route: ActivatedRoute,
     private router: Router,
-    private http: HttpClient // ← necesario para enviar a /AgregarCarrito
+    private authService: AuthService,
   ) {}
 
   ngOnInit(): void {
@@ -67,11 +67,19 @@ export class Shop implements OnInit {
     }
   }
 
-  agregarAlCarrito(producto: Producto, cantidad: number): void {
-    const params = new HttpParams()
-      .set('id', producto.id.toString())
-      .set('cantidad', cantidad.toString());
-
-    this.http.post('/AgregarCarrito', null, { params, withCredentials: true }).subscribe();
+  agregarAlCarrito(producto: Producto,cantidad:number): void {
+   const usuario = this.authService.getUsuarioActual();
+    if (!usuario) {
+      this.router.navigate(['/login']);
+      return;
+    }
+    this.homeService.agregarAlCarrito(producto.id, cantidad)
+      .then(() => {
+        this.router.navigate(['/carrito']);
+        console.log(`Producto agregado al carrito`);
+      })
+      .catch((error) => {
+        console.error('Error al agregar al carrito:', error);
+      });
   }
 }

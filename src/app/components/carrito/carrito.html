@@ -13,7 +13,7 @@
                 </div>
                 <div class="row mb-2 align-items-center" *ngFor="let detalle of carritoItems">
                     <div class="col-2">
-                        <img [src]="detalle.producto.Imagen || 'assets/img/default.png'" alt="Imagen"
+                        <img [src]="detalle.producto.imagen || 'assets/img/default.png'" alt="Imagen"
                             class="img-fluid rounded" style="max-width:70px;">
                     </div>
                     <div class="col-4">{{ detalle.producto.nombre }}</div>

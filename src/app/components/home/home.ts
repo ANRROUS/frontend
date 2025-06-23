@@ -94,7 +94,7 @@ export class Home implements OnInit {
   ];
 
   agregarAlCarrito(producto: Producto): void {
-    this.homeCartService.agregarAlCarrito(producto, 1);
+    this.homeCartService.agregarAlCarrito(producto.id, 1);
     // Opcional: Mostrar notificación
     alert(`${producto.nombre} añadido al carrito`);
   }

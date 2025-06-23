@@ -23,43 +23,17 @@ export class HomeCartService {
     }
 
     /* ========== MÉTODOS CARRITO ========== */
-    agregarAlCarrito(producto: Producto, cantidad: number): void {
-        const itemExistente = this.carritoItems.find(item =>
-            item.producto?.id === producto.id
-        );
-
-        if (itemExistente && itemExistente.producto) {
-            itemExistente.cantidad = (itemExistente.cantidad || 0) + cantidad;
-            itemExistente.subtotal = itemExistente.cantidad * producto.precio;
-        } else {
-            this.carritoItems.push({
-                producto,
-                cantidad,
-                precio_unitario: producto.precio,
-                subtotal: producto.precio * cantidad
-            } as DetallePedido); // Type assertion
-        }
+    async agregarAlCarrito(productoId: number, cantidad: number): Promise<void> {
+    await api.post('/carrito', { productoId, cantidad }, { withCredentials: true });
     }
 
-    obtenerCarrito(): Partial<DetallePedido>[] {
-        return this.carritoItems;
-    }
-
-    calcularTotal(): number {
-        return this.carritoItems.reduce((total, item) =>
-            total + (item.subtotal || 0), 0
-        );
+    async obtenerCarrito(): Promise<DetallePedido[]> {
+    const res = await api.get<DetallePedido[]>('/carrito', { withCredentials: true });
+    return res.data;
     }
 
     async procesarCompra(): Promise<void> {
-        if (this.carritoItems.length === 0) {
-            throw new Error('Carrito vacío');
-        }
-
-        await api.post('/ProcesarCompra', {
-            items: this.carritoItems
-        });
-
-        this.carritoItems = [];
+    await api.post('/procesar-compra', {}, { withCredentials: true });
+    this.carritoItems = [];
     }
 }
