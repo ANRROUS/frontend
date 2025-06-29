@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import api from '../../services/axios.config';
 import { HomeCartService } from '../../services/home.service';
 
 @Component({

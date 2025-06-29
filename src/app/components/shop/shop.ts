@@ -50,7 +50,6 @@ export class Shop implements OnInit {
     this.homeService
       .listarCategorias()
       .then((categorias) => (this.categorias = categorias));
-
     // Productos
     if (this.categoriaSeleccionada) {
       this.productoService
