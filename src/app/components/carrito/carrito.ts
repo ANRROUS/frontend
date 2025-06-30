@@ -90,10 +90,12 @@ export class Carrito implements OnInit {
     this.homeService.procesarCompra()
       .then(() => {
         console.log('Compra procesada con éxito');
+        this.mensaje= '¡Compra realizada con éxito!';
         this.carritoItems = [];
         this.total = 0;
       })
       .catch(error => {
+        this.mensaje = 'Error al procesar la compra';
         console.error('Error al procesar la compra:', error);
       });
   }
