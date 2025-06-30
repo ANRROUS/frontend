@@ -31,6 +31,30 @@ export class Carrito implements OnInit {
       .catch(error => console.error('Error al obtener el carrito:', error));
   }
 
+  eliminarDelCarrito(productoId: number): void {
+    this.homeService.eliminarDelCarrito(productoId)
+      .then(() => {
+        console.log(`Producto ${productoId} eliminado del carrito`);
+        this.obtenerCarrito();
+      })
+      .catch(error => {
+        this.mensaje = 'Error al eliminar el producto del carrito';
+        console.error('Error al eliminar del carrito:', error);
+      });
+  }
+
+  actualizarCarrito(productoId: number, cantidad: number): void {
+    this.homeService.actualizarCarrito(productoId, cantidad)
+      .then(() => {
+        console.log(`Carrito actualizado`);
+        this.obtenerCarrito();
+      })
+      .catch(error => {
+        this.mensaje = 'Error al actualizar el carrito';
+        console.error('Error al actualizar el carrito:', error);
+      });
+  }
+
   // ✅ PARSEA LA PÁGINA /carrito Y EXTRAER DATOS (simple, pero poco flexible)
   // async cargarCarritoDesdeBackend(): Promise<void> {
   //   try {
@@ -85,6 +109,7 @@ export class Carrito implements OnInit {
   //     this.mensaje = 'Error al procesar la compra';
   //   }
   // }
+  
 
   procesarCompra(): void {
     this.homeService.procesarCompra()

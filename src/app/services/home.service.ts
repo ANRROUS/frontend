@@ -32,6 +32,14 @@ export class HomeCartService {
     return res.data;
     }
 
+    async eliminarDelCarrito(productoId: number): Promise<void> {
+    await api.delete(`/carrito/${productoId}`, { withCredentials: true });
+    }
+
+    async actualizarCarrito(productoId: number, cantidad: number): Promise<void> {
+    await api.put(`/carrito/${productoId}`, { cantidad }, { withCredentials: true });
+    }
+
     async procesarCompra(): Promise<void> {
     await api.post('/procesar-compra', {}, { withCredentials: true });
     this.carritoItems = [];
