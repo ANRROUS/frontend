@@ -35,6 +35,9 @@
                     <a href="#" class="icon-link position-relative">
                         <i class="fas fa-heart"></i>
                     </a>
+                    <a *ngIf="usuario?.rol === 'ADMIN'" routerLink="/admin/dashboard" class="icon-link position-relative ms-2" title="Administrar">
+                        <i class="fas fa-cogs"></i>
+                    </a>
                 </ng-template>
             </div>
         </div>
