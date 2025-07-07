@@ -25,6 +25,8 @@ export class Register {
   error: string | null = null;
   success: string | null = null;
   loading: boolean = false;
+  errorFields: { [key: string]: string } = {};
+
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -32,15 +34,25 @@ export class Register {
     this.loading = true;
     this.error = null;
     this.success = null;
+    this.errorFields = {};
     this.authService.registrar(this.usuario)
     .then(() => {
       this.success = '¡Registro exitoso! Ahora puedes iniciar sesión.';
     setTimeout(() => this.router.navigate(['/login']), 2000);
-    }).catch(error => {
-      this.error = 'Error al registrar. Verifica los datos y vuelve a intentarlo.';
-      console.error('Error en registro:', error);
-    }).finally(() => {
-      this.loading = false;
+    })
+    .catch(error => {
+      if (error.response && error.response.data) {
+        if (typeof error.response.data === 'object') {
+          this.errorFields = error.response.data;
+        } else {
+          this.error = error.response.data.error || 'Error al registrar.';
+        }
+      } else {
+        this.error = 'Error al registrar. Verifica los datos y vuelve a intentarlo.';
+      }
+    })
+    .finally(() => {
+    this.loading = false;
     });
   }
 }

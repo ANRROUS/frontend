@@ -43,12 +43,11 @@
         </div>
     </section>
 
-    <!-- Productos -->
+    <!-- Categorias -->
     <section class="section-product">
         <div class="container my-5">
-            <h4 class="fw-bold">Productos</h4>
+            <h4 class="fw-bold">Categorías</h4>
 
-            <!-- Fila deslizable de categorías -->
             <div class="d-flex overflow-auto gap-3 py-3">
                 <div class="flex-shrink-0 text-center" *ngFor="let cat of categorias">
                     <a [routerLink]="['/shop']" [queryParams]="{categoriaId: cat.id}" class="text-decoration-none">
@@ -66,7 +65,8 @@
 
     <!-- Listado de productos -->
     <section class="container my-5 section-filter">
-        <div class="row row-cols-2 row-cols-md-4 g-4 justify-content-center">
+        <h4 class="fw-bold">Productos</h4>
+        <div id="productos" class="row row-cols-2 row-cols-md-4 g-4 justify-content-center">
             <div class="col" *ngFor="let producto of productos">
                 <div class="product-card text-center">
                     <img [src]="producto.imagen" class="img-fluid" [alt]="producto.nombre">
@@ -81,7 +81,7 @@
 
     <!-- Destacados -->
     <section class="section-featured">
-        <div class="container my-5">
+        <div id="destacados" class="container my-5">
             <h4 class="fw-bold">Destacados</h4>
             <hr>
             <div class="row row-cols-2 row-cols-md-4 g-4">
@@ -124,4 +124,6 @@
             </div>
         </div>
     </section>
+
+    
 </div>

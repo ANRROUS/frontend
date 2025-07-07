@@ -1,4 +1,3 @@
-
 <section class="container my-5" style="max-width: 400px;">
     <h3 class="fw-bold mb-3">¡Regístrate!</h3>
     <p class="text-muted">Se requiere una cuenta para poder hacer una compra.</p>
@@ -7,26 +6,32 @@
         <div class="mb-3">
             <label for="nombre" class="form-label">Nombre</label>
             <input type="text" class="form-control" id="nombre" [(ngModel)]="usuario.nombre" name="nombre" required>
+            <div *ngIf="errorFields['nombre']" class="alert alert-danger small py-1 px-2 mt-1">{{errorFields['nombre']}}</div>
         </div>
         <div class="mb-3">
             <label for="apellido" class="form-label">Apellido</label>
             <input type="text" class="form-control" id="apellido" [(ngModel)]="usuario.apellido" name="apellido" required>
+            <div *ngIf="errorFields['apellido']" class="alert alert-danger small py-1 px-2 mt-1">{{errorFields['apellido']}}</div>
         </div>
         <div class="mb-3">
             <label for="correo" class="form-label">Correo Electrónico</label>
             <input type="email" class="form-control" id="correo" [(ngModel)]="usuario.correo" name="correo" required>
+            <div *ngIf="errorFields['correo']" class="alert alert-danger small py-1 px-2 mt-1">{{errorFields['correo']}}</div>
         </div>
             <div class="mb-3">
             <label for="clave" class="form-label">Contraseña</label>
             <input type="password" class="form-control" id="clave" [(ngModel)]="usuario.clave" name="clave" required>
+            <div *ngIf="errorFields['clave']" class="alert alert-danger small py-1 px-2 mt-1">{{errorFields['clave']}}</div>
         </div>
         <div class="mb-3">
             <label for="telefono" class="form-label">Teléfono</label>
             <input type="text" class="form-control" id="telefono" [(ngModel)]="usuario.telefono" name="telefono" required>
+            <div *ngIf="errorFields['telefono']" class="alert alert-danger small py-1 px-2 mt-1">{{errorFields['telefono']}}</div>
         </div>
         <div class="mb-3">
             <label for="direccion" class="form-label">Dirección</label>
             <input type="text" class="form-control" id="direccion" [(ngModel)]="usuario.direccion" name="direccion" required>
+            <div *ngIf="errorFields['direccion']" class="alert alert-danger small py-1 px-2 mt-1">{{errorFields['direccion']}}</div>
         </div>
         <div class="d-grid mb-3">
             <button type="submit" class="btn btn-primary" [disabled]="loading">
@@ -41,4 +46,5 @@
         <div *ngIf="success" class="alert alert-success">{{success}}</div>
     </form>
 </section>
+
 
