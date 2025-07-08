@@ -20,13 +20,14 @@
                     <div class="col-3">{{ detalle.producto.nombre }}</div>
                     <div class="col-2">${{ detalle.precio_unitario | number:'1.2-2' }}</div>
                     <div class="col-2">
-                    <input type="number" min="1" [(ngModel)]="detalle.cantidad" class="form-control form-control-sm d-inline w-75"
+                        <input type="number" min="1" [(ngModel)]="detalle.cantidad"
+                            class="form-control form-control-sm d-inline w-75"
                             (change)="actualizarCarrito(detalle.producto.id, detalle.cantidad)">
                     </div>
                     <div class="col-2 fw-semibold">${{ detalle.subtotal | number:'1.2-2' }}</div>
                     <div class="col-1">
                         <button class="btn btn-sm btn-link text-primary p-0"
-                                (click)="eliminarDelCarrito(detalle.producto.id)">
+                            (click)="eliminarDelCarrito(detalle.producto.id)">
                             <i class="fas fa-times"></i>
                         </button>
                     </div>
@@ -58,5 +59,24 @@
         <div *ngIf="mensaje" class="alert alert-success text-center mt-4">
             {{ mensaje }}
         </div>
+        <div *ngIf="seguimientoActivo" class="mt-5">
+            <h5 class="text-center mb-4 fw-bold">Seguimiento de tu pedido</h5>
+
+            <div class="progress-tracker">
+                <div *ngFor="let etapa of etapasSeguimiento; let i = index" class="step"
+                    [class.active]="i <= etapaActual">
+                    <div class="step-icon">
+                        <i class="fas" [ngClass]="{
+          'fa-check-circle': i < etapaActual,
+          'fa-spinner fa-spin': i === etapaActual,
+          'fa-circle': i > etapaActual
+        }"></i>
+                    </div>
+                    <div class="step-label">{{ etapa }}</div>
+                    <div *ngIf="i < etapasSeguimiento.length - 1" class="step-line"></div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
