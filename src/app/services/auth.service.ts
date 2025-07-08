@@ -44,6 +44,7 @@ export class AuthService {
     try {
       const res = await api.get<Usuario>('/api/usuario/actual');
       this.usuarioSubject.next(res.data);
+      console.log(res.data);
     } catch (err) {
       this.usuarioSubject.next(null);
     }
