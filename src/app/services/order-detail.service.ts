@@ -8,21 +8,21 @@ import { Injectable } from '@angular/core';
 
 export class DetallePedidoService {
   async listar(): Promise<DetallePedido[]> {
-    const res = await api.get<DetallePedido[]>('/detallepedidos');
+    const res = await api.get<DetallePedido[]>('/api/detallepedidos');
     return res.data;
   }
 
   async registrar(detalle: DetallePedido): Promise<DetallePedido> {
-    const res = await api.post<DetallePedido>('/detallepedidos', detalle);
+    const res = await api.post<DetallePedido>('/api/detallepedidos', detalle);
     return res.data;
   }
 
     async actualizar (detalle: DetallePedido): Promise<DetallePedido> {
-    const res = await api.put<DetallePedido>('/detallepedidos', detalle);
+    const res = await api.put<DetallePedido>('/api/detallepedidos', detalle);
     return res.data;
   }
 
   async eliminar(id: number): Promise<void> {
-    await api.delete(`/detallepedidos/${id}`);
+    await api.delete(`/api/detallepedidos/${id}`);
   }
 }

@@ -13,35 +13,35 @@ export class HomeCartService {
 
     /* ========== MÉTODOS HTTP ========== */
     async listarProductos(): Promise<Producto[]> {
-        const res = await api.get<Producto[]>('/');
+        const res = await api.get<Producto[]>('/api/');
         return res.data;
     }
 
     async listarCategorias(): Promise<Categoria[]> {
-        const res = await api.get<Categoria[]>('/categorias');
+        const res = await api.get<Categoria[]>('/api/categorias');
         return res.data;
     }
 
     /* ========== MÉTODOS CARRITO ========== */
     async agregarAlCarrito(productoId: number, cantidad: number): Promise<void> {
-    await api.post('/carrito', { productoId, cantidad }, { withCredentials: true });
+    await api.post('/api/carrito', { productoId, cantidad }, { withCredentials: true });
     }
 
     async obtenerCarrito(): Promise<DetallePedido[]> {
-    const res = await api.get<DetallePedido[]>('/carrito', { withCredentials: true });
+    const res = await api.get<DetallePedido[]>('/api/carrito', { withCredentials: true });
     return res.data;
     }
 
     async eliminarDelCarrito(productoId: number): Promise<void> {
-    await api.delete(`/carrito/${productoId}`, { withCredentials: true });
+    await api.delete(`/api/carrito/${productoId}`, { withCredentials: true });
     }
 
     async actualizarCarrito(productoId: number, cantidad: number): Promise<void> {
-    await api.put(`/carrito/${productoId}`, { cantidad }, { withCredentials: true });
+    await api.put(`/api/carrito/${productoId}`, { cantidad }, { withCredentials: true });
     }
 
     async procesarCompra(): Promise<void> {
-    await api.post('/procesar-compra', {}, { withCredentials: true });
+    await api.post('/api/procesar-compra', {}, { withCredentials: true });
     this.carritoItems = [];
     }
 }

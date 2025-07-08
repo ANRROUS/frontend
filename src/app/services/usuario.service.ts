@@ -8,22 +8,22 @@ import { Injectable } from '@angular/core';
 
 export class UsuarioService {
   async listar(): Promise<Usuario[]> {
-    const res = await api.get<Usuario[]>('/usuarios');
+    const res = await api.get<Usuario[]>('/api/usuarios');
     return res.data;
   }
 
   async obtenerPorId(id: number): Promise<Usuario> {
-    const res = await api.get<Usuario>(`/usuarios/${id}`);
+    const res = await api.get<Usuario>(`/api/usuarios/${id}`);
     return res.data;
   }
 
   async registrar(usuario: Usuario): Promise<Usuario> {
-    const res = await api.post<Usuario>('/usuarios/registrar', usuario);
+    const res = await api.post<Usuario>('/api/usuarios/registrar', usuario);
     return res.data;
   }
 
   async actualizar(usuario: Usuario): Promise<Usuario> {
-    const res = await api.put<Usuario>('/usuarios', usuario);
+    const res = await api.put<Usuario>('/api/usuarios', usuario);
     return res.data;
   }
 }
