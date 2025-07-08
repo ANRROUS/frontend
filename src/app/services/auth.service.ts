@@ -52,6 +52,7 @@ export class AuthService {
 
   // ✅ LOGOUT: elimina el token
   async logout(): Promise<void> {
+    await api.get('/api/logout', { withCredentials: true });
     localStorage.removeItem('token');
     this.usuarioSubject.next(null);
   }
