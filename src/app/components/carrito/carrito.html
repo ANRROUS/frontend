@@ -58,5 +58,23 @@
         <div *ngIf="mensaje" class="alert alert-success text-center mt-4">
             {{ mensaje }}
         </div>
+        <div *ngIf="seguimientoActivo" class="mt-5">
+  <h5 class="text-center mb-4 fw-bold">Seguimiento de tu pedido</h5>
+
+  <div class="progress-tracker">
+    <div *ngFor="let etapa of etapasSeguimiento; let i = index" class="step" [class.active]="i <= etapaActual">
+      <div class="step-icon">
+        <i class="fas" [ngClass]="{
+          'fa-check-circle': i < etapaActual,
+          'fa-spinner fa-spin': i === etapaActual,
+          'fa-circle': i > etapaActual
+        }"></i>
+      </div>
+      <div class="step-label">{{ etapa }}</div>
+      <div *ngIf="i < etapasSeguimiento.length - 1" class="step-line"></div>
+    </div>
+  </div>
+</div>
+
     </div>
 </div>

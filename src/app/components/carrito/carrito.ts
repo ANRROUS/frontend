@@ -14,6 +14,16 @@ export class Carrito implements OnInit {
   total: number = 0;
   mensaje: string = '';
 
+  // 👇 NUEVAS VARIABLES PARA EL SEGUIMIENTO
+  seguimientoActivo: boolean = false;
+  etapasSeguimiento: string[] = [
+    'Pedido recibido',
+    'Procesando pedido',
+    'En camino',
+    'Entregado'
+  ];
+  etapaActual: number = 0;
+
   constructor(
     private homeService: HomeCartService 
   ){}
@@ -22,7 +32,7 @@ export class Carrito implements OnInit {
     this.obtenerCarrito();
   }
 
-  obtenerCarrito():void {
+  obtenerCarrito(): void {
     this.homeService.obtenerCarrito()
       .then(items => {
         this.carritoItems = items;
@@ -55,14 +65,25 @@ export class Carrito implements OnInit {
       });
   }
 
-
   procesarCompra(): void {
     this.homeService.procesarCompra()
       .then(() => {
         console.log('Compra procesada con éxito');
-        this.mensaje= '¡Compra realizada con éxito!';
+        this.mensaje = '¡Compra realizada con éxito!';
         this.carritoItems = [];
         this.total = 0;
+
+        // 👇 Activar seguimiento de pedido
+        this.seguimientoActivo = true;
+        this.etapaActual = 0;
+
+        const interval = setInterval(() => {
+          if (this.etapaActual < this.etapasSeguimiento.length - 1) {
+            this.etapaActual++;
+          } else {
+            clearInterval(interval);
+          }
+        }, 9000000);
       })
       .catch(error => {
         this.mensaje = 'Error al procesar la compra';
