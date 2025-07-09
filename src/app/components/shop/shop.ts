@@ -67,7 +67,7 @@ export class Shop implements OnInit {
   }
 
   agregarAlCarrito(producto: Producto,cantidad:number): void {
-   const usuario = this.authService.getUsuarioActual();
+  const usuario = this.authService.getUsuarioActual();
     if (!usuario) {
       this.router.navigate(['/login']);
       return;

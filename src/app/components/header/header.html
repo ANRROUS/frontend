@@ -43,7 +43,7 @@
         <!-- 🛠️ ADMIN -->
         <ng-container *ngIf="usuario?.rol === 'ADMIN'">
           <a (click)="logout()" style="cursor: pointer;" class="login-link me-3">Log out</a>
-          <a routerLink="/carrito" class="icon-link position-relative">
+          <a id="carrito-most" routerLink="/carrito" class="icon-link position-relative">
             <i class="fas fa-shopping-cart"></i>
           </a>
           <a routerLink="/admin/dashboard" class="icon-link position-relative ms-2" title="Administrar">
