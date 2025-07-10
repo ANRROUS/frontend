@@ -1,8 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
+:root{
+    --primary-color: #AB43FF;
+}
+
+
 body {
     overflow-x: hidden;
     font-family: 'Montserrat', sans-serif;
     font-size: 0.8rem;
+}
+
+header{
+    position: sticky;
+    top: 0;
+    box-shadow: 0 0 3px black;
+    z-index: 1000;
 }
 /*NavBar*/
 .navbar-custom {

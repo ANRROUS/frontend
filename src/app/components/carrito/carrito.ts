@@ -1,3 +1,4 @@
+// carrito.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -6,6 +7,7 @@ import { HomeCartService } from '../../services/home.service';
 @Component({
   selector: 'app-cart',
   templateUrl: './carrito.html',
+  standalone: true,
   imports: [CommonModule, FormsModule],
   styleUrls: ['./carrito.css']
 })
@@ -14,19 +16,7 @@ export class Carrito implements OnInit {
   total: number = 0;
   mensaje: string = '';
 
-  // 👇 NUEVAS VARIABLES PARA EL SEGUIMIENTO
-  seguimientoActivo: boolean = false;
-  etapasSeguimiento: string[] = [
-    'Pedido recibido',
-    'Procesando pedido',
-    'En camino',
-    'Entregado'
-  ];
-  etapaActual: number = 0;
-
-  constructor(
-    private homeService: HomeCartService 
-  ){}
+  constructor(private homeService: HomeCartService) {}
 
   ngOnInit(): void {
     this.obtenerCarrito();
@@ -38,7 +28,10 @@ export class Carrito implements OnInit {
         this.carritoItems = items;
         this.total = items.reduce((sum, item) => sum + (item.subtotal || 0), 0);
       })
-      .catch(error => console.error('Error al obtener el carrito:', error));
+      .catch(error => {
+        console.error('Error al obtener el carrito:', error);
+        this.mensaje = 'Error al cargar el carrito';
+      });
   }
 
   eliminarDelCarrito(productoId: number): void {
@@ -54,6 +47,18 @@ export class Carrito implements OnInit {
   }
 
   actualizarCarrito(productoId: number, cantidad: number): void {
+    // Validar cantidad mínima
+    if (cantidad < 1) {
+      cantidad = 1;
+      // Buscar el item para actualizar la vista
+      const item = this.carritoItems.find(i => i.producto.id === productoId);
+      if (item) {
+        setTimeout(() => item.cantidad = 1, 0);
+      }
+      this.mensaje = 'La cantidad mínima es 1';
+      return;
+    }
+
     this.homeService.actualizarCarrito(productoId, cantidad)
       .then(() => {
         console.log(`Carrito actualizado`);
@@ -66,28 +71,30 @@ export class Carrito implements OnInit {
   }
 
   procesarCompra(): void {
+    if (this.carritoItems.length === 0) {
+      this.mensaje = 'El carrito está vacío';
+      return;
+    }
+
+    this.procesando = true;
+    this.mensaje = '';
+    
     this.homeService.procesarCompra()
       .then(() => {
         console.log('Compra procesada con éxito');
         this.mensaje = '¡Compra realizada con éxito!';
         this.carritoItems = [];
         this.total = 0;
-
-        // 👇 Activar seguimiento de pedido
-        this.seguimientoActivo = true;
-        this.etapaActual = 0;
-
-        const interval = setInterval(() => {
-          if (this.etapaActual < this.etapasSeguimiento.length - 1) {
-            this.etapaActual++;
-          } else {
-            clearInterval(interval);
-          }
-        }, 9000000);
       })
       .catch(error => {
         this.mensaje = 'Error al procesar la compra';
         console.error('Error al procesar la compra:', error);
+        this.procesando = false;
       });
+  }
+
+  handleImageError(event: Event): void {
+    const img = event.target as HTMLImageElement;
+    img.src = 'assets/img/default.png';
   }
 }

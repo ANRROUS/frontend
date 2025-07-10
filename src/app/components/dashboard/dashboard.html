@@ -1,15 +1,14 @@
 <!-- Contenedor principal Angular -->
 <div class="container-fluid d-flex p-0" style="min-height: 100vh;">
     <!-- Sidebar navbar -->
-    <nav id="sidebar" class="sidebar d-flex flex-column p-4 position-relative shadow-lg"
-        style="background: linear-gradient(135deg, #AE4BFD 80%, #6C2EBE 100%); width: 260px; color: white; min-height: 100vh; z-index: 1020;">
+    <nav id="sidebar" class="d-flex flex-column p-4 shadow-lg bg-rose" style="width: 250px;">
         <div class="sidebar-header mb-4 d-flex align-items-center justify-content-between">
-            <h4 class="fw-bold mb-0">MagicShop Admin</h4>
+            <h4 style="color: white; text-align: center; font-weight: bolder;">MagicShop Admin</h4>
             <button class="btn btn-outline-light d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="bi bi-x-lg"></i>
             </button>
         </div>
-        <div id="sidebarMenu" class="d-md-block">
+        <div id="sidebarMenu">
             <a href="#" (click)="cargarVista('productos', $event)"
                 class="nav-link d-flex align-items-center mb-3 p-3 rounded"
                 [ngClass]="vista === 'productos' ? 'bg-white text-primary shadow-sm' : ''"
@@ -21,7 +20,7 @@
             <a href="#" (click)="cargarVista('usuarios', $event)"
                 class="nav-link d-flex align-items-center mb-3 p-3 rounded"
                 [ngClass]="vista === 'usuarios' ? 'bg-white text-primary shadow-sm' : ''"
-                style="color: white; transition: all 0.3s; font-weight: 500;"
+                style="color: rgb(255, 255, 255); transition: all 0.3s; font-weight: 500;"
                 (mouseover)="setRowHover($event, true)" (mouseout)="setRowHover($event, false)">
                 <i class="bi bi-people me-3 fs-5"></i>
                 <span class="fw-medium">Usuarios</span>

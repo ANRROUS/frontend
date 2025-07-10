@@ -20,14 +20,15 @@
                     <div class="col-3">{{ detalle.producto.nombre }}</div>
                     <div class="col-2">${{ detalle.precio_unitario | number:'1.2-2' }}</div>
                     <div class="col-2">
-                    <input type="number" min="1" [(ngModel)]="detalle.cantidad" class="form-control form-control-sm d-inline w-75"
+                        <input type="number" min="1" [(ngModel)]="detalle.cantidad"
+                            class="form-control form-control-sm d-inline w-75"
                             (change)="actualizarCarrito(detalle.producto.id, detalle.cantidad)">
                     </div>
                     <div class="col-2 fw-semibold">${{ detalle.subtotal | number:'1.2-2' }}</div>
                     <div class="col-1">
                         <button class="btn btn-sm btn-link text-primary p-0"
-                                (click)="eliminarDelCarrito(detalle.producto.id)">
-                            <i class="fas fa-times"></i>
+                            (click)="eliminarDelCarrito(detalle.producto.id)">
+                            <i class="fas fa-times letter-rose"></i>
                         </button>
                     </div>
                 </div>
@@ -51,7 +52,7 @@
                     <span>Total:</span>
                     <span>${{ total | number:'1.2-2' }}</span>
                 </div>
-                <button class="btn btn-primary w-100 mt-4" (click)="procesarCompra()">Realizar la compra</button>
+                <button class="btn btn-primary w-100 mt-4 bg-rose border-rose" (click)="procesarCompra()">Realizar la compra</button>
             </div>
         </div>
 
