@@ -1,56 +1,58 @@
-<nav class="navbar navbar-expand-lg navbar-light navbar-custom py-3">
-  <div class="container">
-    <!-- Logo -->
-    <a class="navbar-brand d-flex align-items-center" routerLink="/">
-      <img [src]="logoPath" alt="Logo" width="30" height="30" class="me-2">
-      MAGIC SHOP
-    </a>
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light navbar-custom py-3">
+    <div class="container">
+      <!-- Logo -->
+      <a class="navbar-brand d-flex align-items-center" routerLink="/">
+        <img [src]="logoPath" alt="Logo" width="30" height="30" class="me-2">
+        MAGIC SHOP
+      </a>
 
-    <!-- Botón responsive -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+      <!-- Botón responsive -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <!-- Navegación -->
-    <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
-      <!-- Enlaces públicos -->
-      <ul class="navbar-nav">
-        <li class="nav-item"><a class="nav-link" routerLink="/" routerLinkActive="active">Inicio</a></li>
-        <li class="nav-item"><a class="nav-link" routerLink="/shop" routerLinkActive="active">Shop</a></li>
-                <li class="nav-item"><a class="nav-link" href="#productos">Productos</a></li>
-        <li class="nav-item"><a class="nav-link" href="#destacados">Destacados</a></li>
-      </ul>
+      <!-- Navegación -->
+      <div class="collapse navbar-collapse justify-content-around" id="navbarNav">
+        <!-- Enlaces públicos -->
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" routerLink="/" routerLinkActive="active">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/shop" routerLinkActive="active">Shop</a></li>
+          <li class="nav-item"><a class="nav-link" href="#productos">Productos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#destacados">Destacados</a></li>
+        </ul>
 
-      <!-- Zona usuario -->
-      <div class="d-flex align-items-center">
-        <!-- 🔓 ANONYMOUS -->
-        <ng-container *ngIf="usuario?.rol === 'ANONYMOUS' || !usuario">
-          <a routerLink="/login" class="login-link me-1">
-            <i class="fa-regular fa-user m-2"></i>Login
-          </a>
-          <span class="badge mx-1" style="color: #009cff;">/</span>
-          <a routerLink="/register" class="login-link me-3">Register</a>
-        </ng-container>
+        <!-- Zona usuario -->
+        <div class="d-flex align-items-center">
+          <!-- 🔓 ANONYMOUS -->
+          <ng-container *ngIf="usuario?.rol === 'ANONYMOUS' || !usuario">
+            <a routerLink="/login" class="letter-rose">
+              <i class="fa-regular fa-user m-2"></i>Login
+            </a>
+            <span class="badge mx-1" style="color: #de70ef;">/</span>
+            <a routerLink="/register" class="letter-rose">Register</a>
+          </ng-container>
 
-        <!-- 🔐 CLIENTE -->
-        <ng-container *ngIf="usuario?.rol === 'CLIENTE'">
-          <a (click)="logout()" style="cursor: pointer;" class="login-link me-3">Log out</a>
-          <a routerLink="/carrito" class="icon-link position-relative">
-            <i class="fas fa-shopping-cart"></i>
-          </a>
-        </ng-container>
+          <!-- 🔐 CLIENTE -->
+          <ng-container *ngIf="usuario?.rol === 'CLIENTE'">
+            <a (click)="logout()" style="cursor: pointer;" class="letter-rose">Log out</a>
+            <a id="carrito-most" routerLink="/carrito" class="icon-link position-relative">
+              <i class="fas fa-shopping-cart"></i>
+            </a>
+          </ng-container>
 
-        <!-- 🛠️ ADMIN -->
-        <ng-container *ngIf="usuario?.rol === 'ADMIN'">
-          <a (click)="logout()" style="cursor: pointer;" class="login-link me-3">Log out</a>
-          <a id="carrito-most" routerLink="/carrito" class="icon-link position-relative">
-            <i class="fas fa-shopping-cart"></i>
-          </a>
-          <a routerLink="/admin/dashboard" class="icon-link position-relative ms-2" title="Administrar">
-            <i class="fas fa-cogs"></i>
-          </a>
-        </ng-container>
+          <!-- 🛠️ ADMIN -->
+          <ng-container *ngIf="usuario?.rol === 'ADMIN'">
+            <a (click)="logout()" style="cursor: pointer;" class="letter-rose m-3">Log out</a>
+            <a id="carrito-most" routerLink="/carrito" class="letter-rose position-relative">
+              <i class="fas fa-shopping-cart"></i>
+            </a>
+            <a routerLink="/admin/dashboard" class="letter-rose position-relative m-3" title="Administrar">
+              <i class="fas fa-cogs"></i>
+            </a>
+          </ng-container>
+        </div>
       </div>
     </div>
-  </div>
-</nav>
+  </nav>
+</header>

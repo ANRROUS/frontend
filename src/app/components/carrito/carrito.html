@@ -28,7 +28,7 @@
                     <div class="col-1">
                         <button class="btn btn-sm btn-link text-primary p-0"
                             (click)="eliminarDelCarrito(detalle.producto.id)">
-                            <i class="fas fa-times"></i>
+                            <i class="fas fa-times letter-rose"></i>
                         </button>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                     <span>Total:</span>
                     <span>${{ total | number:'1.2-2' }}</span>
                 </div>
-                <button class="btn btn-primary w-100 mt-4" (click)="procesarCompra()">Realizar la compra</button>
+                <button class="btn btn-primary w-100 mt-4 bg-rose border-rose" (click)="procesarCompra()">Realizar la compra</button>
             </div>
         </div>
 
@@ -65,14 +65,14 @@
             <div class="progress-tracker">
                 <div *ngFor="let etapa of etapasSeguimiento; let i = index" class="step"
                     [class.active]="i <= etapaActual">
-                    <div class="step-icon">
-                        <i class="fas" [ngClass]="{
+                    <div class="step-icon bg-rose">
+                        <i class="fas " [ngClass]="{
           'fa-check-circle': i < etapaActual,
           'fa-spinner fa-spin': i === etapaActual,
           'fa-circle': i > etapaActual
         }"></i>
                     </div>
-                    <div class="step-label">{{ etapa }}</div>
+                    <div class="step-label letter-rose">{{ etapa }}</div>
                     <div *ngIf="i < etapasSeguimiento.length - 1" class="step-line"></div>
                 </div>
             </div>

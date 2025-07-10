@@ -17,6 +17,6 @@ export class AppComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.authService.verificarSesion(); // ✅ verifica token al cargar
+    this.authService.verificarSesion();
   }
 }

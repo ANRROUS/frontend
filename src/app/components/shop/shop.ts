@@ -6,6 +6,7 @@ import { ProductoService } from '../../services/producto.service';
 import { HomeCartService } from '../../services/home.service';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
+import { timeInterval } from 'rxjs';
 
 @Component({
   selector: 'app-shop',
@@ -25,7 +26,7 @@ export class Shop implements OnInit {
     private homeService: HomeCartService,
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -66,15 +67,23 @@ export class Shop implements OnInit {
     }
   }
 
-  agregarAlCarrito(producto: Producto,cantidad:number): void {
-  const usuario = this.authService.getUsuarioActual();
+  agregarAlCarrito(producto: Producto, cantidad: number): void {
+    const usuario = this.authService.getUsuarioActual();
+    const carrito_icon = document.getElementById('carrito-most');
+    if (carrito_icon) {
+      carrito_icon.style.animation = 'none';
+      carrito_icon.offsetHeight;
+      carrito_icon.style.animation = 'carrito-animation 1s forwards';
+    }
+
+    console.log(carrito_icon);
     if (!usuario) {
       this.router.navigate(['/login']);
       return;
     }
-    this.homeService.agregarAlCarrito(producto.id, cantidad)
+    this.homeService
+      .agregarAlCarrito(producto.id, cantidad)
       .then(() => {
-        this.router.navigate(['/carrito']);
         console.log(`Producto agregado al carrito`);
       })
       .catch((error) => {
