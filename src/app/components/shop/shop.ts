@@ -6,6 +6,7 @@ import { ProductoService } from '../../services/producto.service';
 import { HomeCartService } from '../../services/home.service';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 import { timeInterval } from 'rxjs';
 
 @Component({
@@ -26,17 +27,19 @@ export class Shop implements OnInit {
     private homeService: HomeCartService,
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe((params) => {
-      this.categoriaSeleccionada = params['categoriaId']
-        ? Number(params['categoriaId'])
-        : null;
-      this.cargarDatos();
-    });
-  }
+  this.route.queryParams.subscribe((params) => {
+    this.categoriaSeleccionada = params['categoriaId']
+      ? Number(params['categoriaId'])
+      : null;
+    this.cargarDatos();
+  });
+}
+
 
   onCategoriaSeleccionada(categoriaId: number): void {
     this.router.navigate([], {
@@ -70,24 +73,28 @@ export class Shop implements OnInit {
   agregarAlCarrito(producto: Producto, cantidad: number): void {
     const usuario = this.authService.getUsuarioActual();
     const carrito_icon = document.getElementById('carrito-most');
+
     if (carrito_icon) {
       carrito_icon.style.animation = 'none';
       carrito_icon.offsetHeight;
       carrito_icon.style.animation = 'carrito-animation 1s forwards';
     }
 
-    console.log(carrito_icon);
     if (!usuario) {
       this.router.navigate(['/login']);
       return;
     }
+
     this.homeService
       .agregarAlCarrito(producto.id, cantidad)
       .then(() => {
+        this.toastr.success('Producto agregado al carrito', producto.nombre);
         console.log(`Producto agregado al carrito`);
       })
       .catch((error) => {
         console.error('Error al agregar al carrito:', error);
+        this.toastr.error('No se pudo agregar el producto', producto.nombre);
       });
   }
+
 }

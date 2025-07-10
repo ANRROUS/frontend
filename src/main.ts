@@ -2,6 +2,9 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations'; // Opcional: solo si usas animaciones
+
+import { provideToastr } from 'ngx-toastr';
+
 import { provideZoneChangeDetection } from '@angular/core'; // Necesario para change detection
 import { AppComponent } from './app/app';
 import { routes } from './app/app.routes';
@@ -17,6 +20,11 @@ bootstrapApplication(AppComponent, {
       runCoalescing: true            // Optimización para detección de cambios
     }),
     provideAnimations(),             // Opcional: si necesitas animaciones (usa NoopAnimationsModule si no)
-    // Otros providers globales aquí (ej: servicios, interceptors)
+    provideToastr({       // Configuración del Toastr
+      positionClass: 'toast-bottom-right',
+      timeOut: 3000,
+      progressBar: true,
+      closeButton: true,
+    }),
   ]
 }).catch(err => console.error(err));

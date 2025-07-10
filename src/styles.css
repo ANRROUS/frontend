@@ -299,14 +299,97 @@ header{
 }
 
 .step.active .step-icon {
-  background-color: #0d6efd;
+  background-color: var(--primary-color);
 }
 
 .step.active .step-line {
-  background-color: #0d6efd;
+  background-color: var(--primary-color);
 }
 
 .step.active .step-label {
   font-weight: bold;
   color: #0d6efd;
+}
+
+/* Animación del spinner */
+@keyframes fa-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.fa-spin {
+  animation: fa-spin 1.5s infinite linear;
+  display: inline-block;
+}
+
+/*Animación del carrito*/
+
+@keyframes carrito-animation {
+    0%{
+        transform: scale(1);
+    }
+    25%{
+        transform: scale(1.5);
+    }
+    50%{
+        transform: scale(1);
+    }
+    75%{
+        transform: scale(1.5);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
+.letter-rose{
+    color: var(--primary-color) !important;
+    font-weight: bolder;
+}
+
+.bg-rose{
+    background-color: var(--primary-color) !important;
+}
+
+.border-rose{
+    border: 1px solid var(--primary-color) !important;
+}
+
+.form-check-input:checked{
+    background: white;
+    border: 3px solid var(--primary-color);
+}
+
+.position{
+    position: sticky;
+    top: 200px;
+}
+
+/*Shop*/
+
+.container-product{
+    animation: deslizarse-abajo 1s;
+}
+
+@keyframes deslizarse-abajo{
+    from{
+        opacity: 0;
+        transform: translatey(-50px);
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+
+@import 'ngx-toastr/toastr.css';
+
+.toast-success {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+}
+
+.toast-error {
+  background-color: #dc3545 !important;
+  color: white !important;
 }
