@@ -34,7 +34,7 @@
             <div *ngIf="errorFields['direccion']" class="alert alert-danger small py-1 px-2 mt-1">{{errorFields['direccion']}}</div>
         </div>
         <div class="d-grid mb-3">
-            <button type="submit" class="btn btn-primary" [disabled]="loading">
+            <button type="submit" class="btn btn-primary bg-rose border-rose" [disabled]="loading">
                 <span *ngIf="!loading">Registrar cuenta</span>
                 <span *ngIf="loading">
                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -43,7 +43,7 @@
             </button>
         </div>
         <div *ngIf="error" class="alert alert-danger">{{error}}</div>
-        <div *ngIf="success" class="alert alert-success">{{success}}</div>
+        <div *ngIf="success" class="alert alert-success mensaje">{{success}}</div>
     </form>
 </section>
 

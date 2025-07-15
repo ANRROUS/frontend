@@ -393,3 +393,10 @@ header{
   background-color: #dc3545 !important;
   color: white !important;
 }
+
+.mensaje{
+    color: var(--primary-color);
+    font-weight: bolder;
+    border: 1px solid var(--primary-color);
+    background-color: rgba(150, 73, 154, 0.165);
+}   

@@ -12,7 +12,7 @@
             <input type="password" class="form-control" id="clave" [(ngModel)]="clave" name="clave" required>
         </div>
         <div class="d-grid mb-3">
-            <button type="submit" class="btn btn-primary" [disabled]="loading">
+            <button type="submit" class="btn btn-primary bg-rose border-rose" [disabled]="loading">
                 <span *ngIf="!loading">Iniciar sesión</span>
                 <span *ngIf="loading">
                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
